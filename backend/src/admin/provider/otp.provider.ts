@@ -7,6 +7,7 @@ import {
 import { Admin } from '../entity/admin.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { VerifyOtpDTO } from 'src/shared/dto/verify-otp.dto';
 
 @Injectable()
 export class OtpProvider {
@@ -17,19 +18,25 @@ export class OtpProvider {
     @InjectRepository(Admin)
     private readonly adminRepository: Repository<Admin>,
   ) {}
-  public async otpGeneration(admin: Admin) {
+  public generateOtp(): string {
+    return Math.floor(100000 + Math.random() * 900000).toString();
+  }
+  public async otpGeneration(email: string) {
     try {
-      const otp = Math.floor(100000 + Math.random() * 900000).toString();
-      const user = await this.adminRepository.findOneBy({ id: admin.id });
+      const otp = this.generateOtp();
+      const otpExpirationMinutes = 5;
+      const user = await this.adminRepository.findOne({
+        where: { email: email },
+      });
       if (!user) {
         throw new NotFoundException('Admin not found');
       }
       user.generatedOtp = otp;
+      user.otpExpiredAt = new Date(
+        Date.now() + otpExpirationMinutes * 60 * 1000,
+      );
       await this.adminRepository.save(user);
-      return {
-        success: true,
-        otp,
-      };
+      return otp;
     } catch (error) {
       if (
         error instanceof NotFoundException ||
@@ -43,15 +50,24 @@ export class OtpProvider {
     }
   }
 
-  public async otpVerification(otp: string, admin_id: number) {
+  public async otpVerification(verifyOtpDto: VerifyOtpDTO) {
     try {
-      const user = await this.adminRepository.findOneBy({ id: admin_id });
+      const user = await this.adminRepository.findOne({
+        where: { email: verifyOtpDto.email },
+      });
       if (!user) {
         throw new NotFoundException('Admin not found');
       }
-      if (user.generatedOtp !== otp) {
+      if (
+        user.generatedOtp !== verifyOtpDto.otp ||
+        user.otpExpiredAt < new Date()
+      ) {
         throw new BadRequestException('Otp is not correct');
       }
+      user.isVerified = true;
+      user.generatedOtp = null;
+      user.otpExpiredAt = null;
+      await this.adminRepository.save(user);
       return true;
     } catch (error) {
       if (

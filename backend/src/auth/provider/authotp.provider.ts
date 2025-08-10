@@ -1,5 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { OtpProvider as AdminOtpProvider } from 'src/admin/provider/otp.provider';
+import { VerifyOtpDTO } from 'src/shared/dto/verify-otp.dto';
 
 @Injectable()
 export class AuthotpProvider {
@@ -9,7 +10,7 @@ export class AuthotpProvider {
      */
     private readonly adminOtpProvider: AdminOtpProvider,
   ) {}
-  public async otpVerification(otp: string, admin_id: number) {
-    return await this.adminOtpProvider.otpVerification(otp, admin_id);
+  public async otpVerification(verifyOtpDto: VerifyOtpDTO) {
+    return await this.adminOtpProvider.otpVerification(verifyOtpDto);
   }
 }

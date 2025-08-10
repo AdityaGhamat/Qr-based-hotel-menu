@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your OTP Code</title>
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #f9f9f9;
+        padding: 20px;
+        color: #333;
+      }
+      .container {
+        background: #fff;
+        padding: 30px;
+        border-radius: 8px;
+        max-width: 600px;
+        margin: auto;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      h2 {
+        color: #2c3e50;
+      }
+      .otp {
+        font-size: 24px;
+        font-weight: bold;
+        background: #f3f3f3;
+        padding: 10px 20px;
+        display: inline-block;
+        border-radius: 5px;
+        margin-top: 20px;
+        letter-spacing: 3px;
+      }
+      .expiry {
+        margin-top: 15px;
+        font-size: 14px;
+        color: #555;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>OTP Verification</h2>
+      <p>Your One-Time Password (OTP) is:</p>
+      <div class="otp"><%= otp %></div>
+      <p class="expiry">This OTP will expire in <%= expiry %> minutes.</p>
+      <p>If you didn’t request this code, please ignore this email.</p>
+    </div>
+  </body>
+</html>

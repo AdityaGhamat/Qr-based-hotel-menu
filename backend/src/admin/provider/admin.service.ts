@@ -10,7 +10,7 @@ export class AdminService {
     private readonly otpProvider: OtpProvider,
   ) {}
 
-  public async otpGeneration(admin: Admin) {
-    return this.otpProvider.otpGeneration(admin);
+  public async otpGeneration(email: string) {
+    return this.otpProvider.otpGeneration(email);
   }
 }

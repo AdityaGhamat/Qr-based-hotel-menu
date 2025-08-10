@@ -11,6 +11,7 @@ import { AdminModule } from './admin/admin.module';
 import { AuthModule } from './auth/auth.module';
 import { PaymentModule } from './payment/payment.module';
 import { NotificationModule } from './notification/notification.module';
+import { SharedModule } from './shared/shared.module';
 import appConfig from './config/app.config';
 import databaseConfig from './config/database.config';
 import envValidation from './config/validation/env.validation';
@@ -44,6 +45,7 @@ const Env = process.env.NODE_ENV;
     AuthModule,
     PaymentModule,
     NotificationModule,
+    SharedModule,
   ],
   controllers: [AppController],
   providers: [AppService],
