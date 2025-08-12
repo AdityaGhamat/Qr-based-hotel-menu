@@ -5,12 +5,22 @@ import { Admin } from './entity/admin.entity';
 import { OtpProvider } from './provider/otp.provider';
 import { AuthModule } from 'src/auth/auth.module';
 import { AdminController } from './admin.controller';
-import { SendOtpProvider } from './provider/send-otp.provider';
+import { AdminSendOtpProvider } from './provider/send-otp.provider';
 import { CreateAdminProvider } from './provider/create-admin.provider';
+import { NotificationModule } from 'src/notification/notification.module';
 
 @Module({
-  providers: [AdminService, OtpProvider, SendOtpProvider, CreateAdminProvider],
-  imports: [TypeOrmModule.forFeature([Admin]), forwardRef(() => AuthModule)],
+  providers: [
+    AdminService,
+    OtpProvider,
+    AdminSendOtpProvider,
+    CreateAdminProvider,
+  ],
+  imports: [
+    TypeOrmModule.forFeature([Admin]),
+    forwardRef(() => AuthModule),
+    NotificationModule,
+  ],
   exports: [OtpProvider],
   controllers: [AdminController],
 })

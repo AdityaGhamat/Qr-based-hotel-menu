@@ -4,7 +4,7 @@ import { CreateAdminDTO } from '../dto/create-admin.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Admin } from '../entity/admin.entity';
 import { Repository } from 'typeorm';
-import { SendOtpProvider } from './send-otp.provider';
+import { AdminSendOtpProvider } from './send-otp.provider';
 import { DataSource } from 'typeorm';
 @Injectable()
 export class CreateAdminProvider {
@@ -23,7 +23,7 @@ export class CreateAdminProvider {
     /**
      * Injecting sendotp provider
      */
-    private readonly sendOtpProvider: SendOtpProvider,
+    private readonly adminSendOtpProvider: AdminSendOtpProvider,
 
     /**
      * Injecting datasource for transactions
@@ -49,7 +49,7 @@ export class CreateAdminProvider {
       });
       await manager.save(newAdmin);
       try {
-        await this.sendOtpProvider.sendOtp({
+        await this.adminSendOtpProvider.sendOtp({
           email: createAdminDto.email,
           otp,
           expiry: 5,

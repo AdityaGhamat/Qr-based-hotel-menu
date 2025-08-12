@@ -1,0 +1,7 @@
+POST http://localhost:3000/admin/create-admin
+Content-Type:application/json
+
+{
+    "name":"Aditya Ghamat",
+    "email":"seetagawande872@gmail.com"
+}

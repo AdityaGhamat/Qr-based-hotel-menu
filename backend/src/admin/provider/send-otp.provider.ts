@@ -1,31 +1,16 @@
 import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import { MailerService } from '@nestjs-modules/mailer';
 import { SendOtpDTO } from 'src/shared/dto/send-otp.dto';
+import { NotificationService } from 'src/notification/provider/notification.service';
 @Injectable()
-export class SendOtpProvider {
+export class AdminSendOtpProvider {
   constructor(
     /**
-     * Injecting Config service
+     * Injecting notificaiotn service
      */
-    private readonly configService: ConfigService,
-
-    /**
-     * Injecting Mail service
-     */
-    private readonly mailerService: MailerService,
+    private readonly notificationService: NotificationService,
   ) {}
 
   public async sendOtp(sendOtpDto: SendOtpDTO) {
-    await this.mailerService.sendMail({
-      to: sendOtpDto.email,
-      from: this.configService.get('appConfig.nodemailer_mail_user'),
-      subject: 'Otp verification',
-      template: 'otp',
-      context: {
-        otp: sendOtpDto.otp,
-        expiry: sendOtpDto.expiry,
-      },
-    });
+    this.notificationService.SendOtpEmail(sendOtpDto);
   }
 }

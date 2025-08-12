@@ -1,5 +1,6 @@
-import { Controller, Param, Patch, Post } from '@nestjs/common';
+import { Controller, Body, Post } from '@nestjs/common';
 import { AdminService } from './provider/admin.service';
+import { CreateAdminDTO } from './dto/create-admin.dto';
 
 @Controller('admin')
 export class AdminController {
@@ -9,6 +10,8 @@ export class AdminController {
      */
     private readonly adminservice: AdminService,
   ) {}
-  @Post('send-otp')
-  public async sendOtp(@Param() admin_id: string) {}
+  @Post('create-admin')
+  public async createAdminDto(@Body() createAdminDto: CreateAdminDTO) {
+    return this.adminservice.createAdmin(createAdminDto);
+  }
 }

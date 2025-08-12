@@ -5,9 +5,10 @@ import { ConfigService } from '@nestjs/config';
 import { join } from 'path';
 import { EjsAdapter } from '@nestjs-modules/mailer/dist/adapters/ejs.adapter';
 import { SendWelcomeProvider } from './provider/send-welcome.provider';
+import { SendOtpProvider } from './provider/send-otp.provider';
 
 @Module({
-  providers: [NotificationService, SendWelcomeProvider],
+  providers: [NotificationService, SendWelcomeProvider, SendOtpProvider],
   imports: [
     MailerModule.forRootAsync({
       inject: [ConfigService],
@@ -25,10 +26,10 @@ import { SendWelcomeProvider } from './provider/send-welcome.provider';
           from: `Menu <no-replay@nestjs-blog.com>`,
         },
         template: {
-          dir: join(__dirname, 'templates'),
+          dir: join(__dirname, 'template'),
           adapter: new EjsAdapter(),
           options: {
-            strict: true,
+            strict: false,
           },
         },
       }),
