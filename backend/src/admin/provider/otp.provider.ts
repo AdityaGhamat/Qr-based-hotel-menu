@@ -58,17 +58,21 @@ export class OtpProvider {
       if (!user) {
         throw new NotFoundException('Admin not found');
       }
-      if (
-        user.generatedOtp !== verifyOtpDto.otp ||
-        user.otpExpiredAt < new Date()
-      ) {
+      if (!user.generatedOtp) {
+        throw new BadRequestException('No active OTP found');
+      }
+      if (user.generatedOtp !== verifyOtpDto.otp) {
         throw new BadRequestException('Otp is not correct');
       }
+      if (!user.otpExpiredAt || user.otpExpiredAt.getTime() < Date.now()) {
+        throw new BadRequestException('Time limit exceeded');
+      }
+
       user.isVerified = true;
       user.generatedOtp = null;
       user.otpExpiredAt = null;
       await this.adminRepository.save(user);
-      return true;
+      return user;
     } catch (error) {
       if (
         error instanceof NotFoundException ||
@@ -77,7 +81,7 @@ export class OtpProvider {
         throw error;
       }
       throw new InternalServerErrorException(
-        error.message || 'Failed to generate otp',
+        error.message || 'Failed to verify otp',
       );
     }
   }

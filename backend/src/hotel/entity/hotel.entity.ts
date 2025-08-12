@@ -9,7 +9,7 @@ import {
   Index,
 } from 'typeorm';
 import { Table } from './table.entity';
-
+import { Admin } from 'src/admin/entity/admin.entity';
 @Entity()
 export class Hotel {
   @PrimaryGeneratedColumn()
@@ -36,4 +36,7 @@ export class Hotel {
 
   @OneToMany(() => Table, (table) => table.hotel)
   tables: Table[];
+
+  @ManyToMany(() => Admin, (admin) => admin.hotels)
+  admins: Admin[];
 }

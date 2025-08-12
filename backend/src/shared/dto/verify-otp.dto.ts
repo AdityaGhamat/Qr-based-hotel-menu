@@ -1,8 +1,8 @@
-import { IsNumber, IsString, MaxLength } from 'class-validator';
+import { IsNumber, IsString, Length, MaxLength } from 'class-validator';
 
 export class VerifyOtpDTO {
   @IsString()
-  @MaxLength(100)
+  @Length(6, 6)
   otp: string;
 
   @IsString()

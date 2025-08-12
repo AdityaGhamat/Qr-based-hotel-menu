@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn, Index } from 'typeorm';
+import { Hotel } from 'src/hotel/entity/hotel.entity';
+import {
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+  Index,
+  ManyToMany,
+} from 'typeorm';
 
 @Entity()
 export class Admin {
@@ -50,4 +57,7 @@ export class Admin {
     onUpdate: 'CURRENT_TIMESTAMP',
   })
   updatedAt: Date;
+
+  @ManyToMany(() => Hotel, (hotel) => hotel.admins)
+  hotels: Hotel[];
 }
