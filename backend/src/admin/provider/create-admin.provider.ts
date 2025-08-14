@@ -32,6 +32,7 @@ export class CreateAdminProvider {
   ) {}
   public async createAdmin(createAdminDto: CreateAdminDTO) {
     const otp = this.otpProvider.generateOtp();
+    const otpExpirationMinutes = 5;
 
     return await this.dataSource.transaction(async (manager) => {
       const existingAdmin = await manager.findOne(Admin, {
@@ -46,6 +47,7 @@ export class CreateAdminProvider {
         name: createAdminDto.name,
         email: createAdminDto.email,
         generatedOtp: otp,
+        otpExpiredAt: new Date(Date.now() + otpExpirationMinutes * 60 * 1000),
       });
       await manager.save(newAdmin);
       try {
