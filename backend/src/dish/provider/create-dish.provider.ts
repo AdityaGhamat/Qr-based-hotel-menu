@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject, forwardRef } from '@nestjs/common';
 import { Dish } from '../entity/dish.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { In, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { CreateDishDTO } from '../dto/create-dish.dto';
 import { HotelService } from 'src/hotel/provider/hotel.service';
 @Injectable()
@@ -16,6 +16,7 @@ export class CreateDishProvider {
     /**
      * Injecting hotel service
      */
+    @Inject(forwardRef(() => HotelService))
     private readonly hotelService: HotelService,
   ) {}
 
