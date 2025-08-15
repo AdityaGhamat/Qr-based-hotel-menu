@@ -18,8 +18,8 @@ export class DishService {
     private readonly addIngredientsProvider: AddIngredientProvider,
   ) {}
 
-  public async createDish(createDishDto: CreateDishDTO) {
-    return this.createDishProvider.createDish(createDishDto);
+  public async createDish(hotel_id: number, createDishDto: CreateDishDTO) {
+    return this.createDishProvider.createDish(hotel_id, createDishDto);
   }
 
   public async addIngredients(

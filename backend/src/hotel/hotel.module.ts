@@ -5,10 +5,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Hotel } from './entity/hotel.entity';
 import { Table } from './entity/table.entity';
 import { CreateHotelProvider } from './provider/create-hotel.provider';
+import { FindByIdProvider } from './provider/find-by-id.provider';
 
 @Module({
   controllers: [HotelController],
-  providers: [HotelService, CreateHotelProvider],
+  providers: [HotelService, CreateHotelProvider, FindByIdProvider],
   imports: [TypeOrmModule.forFeature([Hotel, Table])],
+  exports: [HotelService],
 })
 export class HotelModule {}

@@ -21,13 +21,9 @@ export class CreateDishDTO {
 
   @IsArray()
   @IsOptional()
-  images?: [];
+  images?: number[];
 
   @IsArray()
   @IsOptional()
-  hotels?: [];
-
-  @IsNumber()
-  @IsNotEmpty()
-  admin_id: number;
+  hotels?: number[];
 }

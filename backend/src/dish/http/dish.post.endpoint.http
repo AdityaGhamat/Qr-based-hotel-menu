@@ -1,0 +1,7 @@
+POST http://localhost:3000/dish/create-dish/1
+Content-Type:application/json
+
+{
+    "name":"Mutter Paneer",
+    "price":"120.50"
+}

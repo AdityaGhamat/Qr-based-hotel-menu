@@ -11,9 +11,12 @@ export class DishController {
      */
     private readonly dishService: DishService,
   ) {}
-  @Post('create-dish')
-  public async createDish(@Body() createDishDto: CreateDishDTO) {
-    return this.dishService.createDish(createDishDto);
+  @Post('create-dish/:hotelId')
+  public async createDish(
+    @Param('hotelId') admin_id: number,
+    @Body() createDishDto: CreateDishDTO,
+  ) {
+    return this.dishService.createDish(admin_id, createDishDto);
   }
 
   @Patch('add-ingredients/:dishId')
