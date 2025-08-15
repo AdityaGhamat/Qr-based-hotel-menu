@@ -17,15 +17,15 @@ export class CreateHotelDTO {
   @IsOptional()
   @IsArray()
   @IsInt({ each: true })
-  dishes?: [];
+  dishes?: number[];
 
   @IsOptional()
   @IsArray()
   @IsInt({ each: true })
-  tables?: [];
+  tables?: number[];
 
   @IsOptional()
   @IsArray()
   @IsInt({ each: true })
-  admins?: [];
+  admins?: number[];
 }

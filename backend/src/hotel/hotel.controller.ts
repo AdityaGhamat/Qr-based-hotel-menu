@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, Param } from '@nestjs/common';
 import { HotelService } from './provider/hotel.service';
 import { CreateHotelDTO } from './dto/create-hotel.dto';
 
@@ -10,8 +10,15 @@ export class HotelController {
      */
     private readonly hotelService: HotelService,
   ) {}
-  @Post('new-hotel')
-  public async createHotel(@Body() createHotelDto: CreateHotelDTO) {
+  @Post('new-hotel/:admin_id')
+  public async createHotel(
+    @Body() createHotelDto: CreateHotelDTO,
+    @Param('admin_id') admin_id: number,
+  ) {
+    if (!createHotelDto.admins) {
+      createHotelDto.admins = [];
+    }
+    createHotelDto.admins.push(admin_id);
     return this.hotelService.createHotel(createHotelDto);
   }
 }

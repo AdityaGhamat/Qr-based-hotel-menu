@@ -6,10 +6,11 @@ import { Dish } from './entity/dish.entity';
 import { DishImages } from './entity/dish-image.entity';
 import { DishIngredient } from './entity/dish-ingredient.entity';
 import { CreateDishProvider } from './provider/create-dish.provider';
+import { AddIngredientProvider } from './provider/add-ingredient.provider';
 
 @Module({
   controllers: [DishController],
-  providers: [DishService, CreateDishProvider],
+  providers: [DishService, CreateDishProvider, AddIngredientProvider],
   imports: [TypeOrmModule.forFeature([Dish, DishImages, DishIngredient])],
 })
 export class DishModule {}

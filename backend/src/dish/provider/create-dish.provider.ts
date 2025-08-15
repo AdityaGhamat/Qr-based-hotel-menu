@@ -14,9 +14,10 @@ export class CreateDishProvider {
   ) {}
 
   public async createDish(createDishDto: CreateDishDTO) {
-    const dish = await this.dishRepository.create({
+    const dish = this.dishRepository.create({
       name: createDishDto.name,
       price: createDishDto.price,
     });
+    await this.dishRepository.save(dish);
   }
 }

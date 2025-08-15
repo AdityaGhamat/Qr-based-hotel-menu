@@ -1,7 +1,7 @@
-POST http://localhost:3000/hotel/new-hotel
+POST http://localhost:3000/hotel/new-hotel/15
 Content-Type:application/json
 
 {
-    "name":"adityaghamat01@gmail.com",
-    "description":"435604"
+    "name":"Swarajya Hotel",
+    "description":"This is swarajya hotel.from blessings of chatrapati shivaji maharaj"
 }

@@ -5,6 +5,7 @@ import {
   PrimaryGeneratedColumn,
   Index,
   ManyToMany,
+  JoinTable,
 } from 'typeorm';
 
 @Entity()
@@ -59,5 +60,6 @@ export class Admin {
   updatedAt: Date;
 
   @ManyToMany(() => Hotel, (hotel) => hotel.admins)
+  @JoinTable()
   hotels: Hotel[];
 }
