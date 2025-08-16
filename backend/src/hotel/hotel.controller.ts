@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Param, Get } from '@nestjs/common';
+import { Body, Controller, Post, Param, Get, Query } from '@nestjs/common';
 import { HotelService } from './provider/hotel.service';
 import { CreateHotelDTO } from './dto/create-hotel.dto';
 
@@ -23,10 +23,14 @@ export class HotelController {
   }
 
   @Get('dishes/:hotel_id')
-  public async getDishesByHotelId(@Param('hotel_id') hotel_id: number) {
+  public async getDishesByHotelId(
+    @Param('hotel_id') hotel_id: number,
+    @Query('page') page: number,
+    @Query('limit') limit: number,
+  ) {
     return this.hotelService.getDishesByHotelId(hotel_id, {
-      page: 1,
-      limit: 10,
+      page: page,
+      limit: limit,
     });
   }
 }

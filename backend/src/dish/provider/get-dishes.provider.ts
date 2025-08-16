@@ -38,4 +38,8 @@ export class GetDishesProvider {
       { hotels: true },
     );
   }
+
+  public async getDishById(dish_id: number): Promise<Dish> {
+    return await this.dishRepository.findOneBy({ id: dish_id });
+  }
 }

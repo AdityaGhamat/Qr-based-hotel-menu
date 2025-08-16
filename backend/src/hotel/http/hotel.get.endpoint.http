@@ -1,1 +1,1 @@
-GET http://localhost:3000/hotel/dishes/1
+GET http://localhost:3000/hotel/dishes/1?page=1&limit=1

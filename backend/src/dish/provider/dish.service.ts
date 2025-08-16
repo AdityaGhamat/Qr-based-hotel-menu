@@ -45,4 +45,8 @@ export class DishService {
   ) {
     return this.getDishesProvider.getDishes(hotel_id, paginationQuery);
   }
+
+  public async getDishById(dish_id: number) {
+    return this.getDishesProvider.getDishById(dish_id);
+  }
 }
