@@ -32,6 +32,12 @@ export class Dish {
   })
   price: string;
 
+  @Column({
+    type: 'boolean',
+    default: true,
+  })
+  available: boolean;
+
   @OneToMany(() => DishImages, (dishImage) => dishImage.dish)
   images: DishImages[];
 
