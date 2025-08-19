@@ -39,7 +39,7 @@ export class GetDishesProvider {
     );
   }
 
-  public async getDishById(dish_id: number): Promise<Dish> {
+  public async getDishById(dish_id: number): Promise<Dish | null> {
     return await this.dishRepository.findOneBy({ id: dish_id });
   }
 }

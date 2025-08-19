@@ -10,6 +10,7 @@ import { AddIngredientProvider } from './provider/add-ingredient.provider';
 import { HotelModule } from 'src/hotel/hotel.module';
 import { PaginationModule } from 'src/shared/module/pagination/pagination.module';
 import { GetDishesProvider } from './provider/get-dishes.provider';
+import { ValidateDishesProvider } from './provider/validate-dishes.provider';
 
 @Module({
   controllers: [DishController],
@@ -18,6 +19,7 @@ import { GetDishesProvider } from './provider/get-dishes.provider';
     CreateDishProvider,
     AddIngredientProvider,
     GetDishesProvider,
+    ValidateDishesProvider,
   ],
   imports: [
     TypeOrmModule.forFeature([Dish, DishImages, DishIngredient]),

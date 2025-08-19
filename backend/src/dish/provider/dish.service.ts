@@ -5,6 +5,7 @@ import { CreateDishDTO } from '../dto/create-dish.dto';
 import { AddIngredientsDTO } from '../dto/add-ingredients.dto';
 import { GetDishesProvider } from './get-dishes.provider';
 import { PaginationQueryDTO } from 'src/shared/module/pagination/dto/pagination-query.dto';
+import { ValidateDishesProvider } from './validate-dishes.provider';
 
 @Injectable()
 export class DishService {
@@ -23,6 +24,11 @@ export class DishService {
      * Injecting getdishes provider
      */
     private readonly getDishesProvider: GetDishesProvider,
+
+    /**
+     * Injecting validating dishes
+     */
+    private readonly validateDishesProvider: ValidateDishesProvider,
   ) {}
 
   public async createDish(hotel_id: number, createDishDto: CreateDishDTO) {
@@ -48,5 +54,9 @@ export class DishService {
 
   public async getDishById(dish_id: number) {
     return this.getDishesProvider.getDishById(dish_id);
+  }
+
+  public async validateDishes(dishIds: number[]) {
+    return this.validateDishesProvider.validateDishes(dishIds);
   }
 }

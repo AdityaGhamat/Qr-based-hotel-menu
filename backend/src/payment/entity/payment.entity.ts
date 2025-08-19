@@ -42,6 +42,5 @@ export class Payment {
   transactionId: string;
 
   @OneToOne(() => Order, (order) => order.payment, { onDelete: 'CASCADE' })
-  @JoinTable()
   order: Order;
 }

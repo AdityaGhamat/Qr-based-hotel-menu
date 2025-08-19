@@ -1,5 +1,12 @@
-import { Entity, Column, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  OneToMany,
+} from 'typeorm';
 import { Hotel } from './hotel.entity';
+import { Order } from 'src/order/entity/order.entity';
 
 @Entity('restaurant-table')
 export class Table {
@@ -14,4 +21,7 @@ export class Table {
 
   @ManyToOne(() => Hotel, (hotel) => hotel.tables)
   hotel: Hotel;
+
+  @OneToMany(() => Order, (order) => order.table)
+  order: Order[];
 }

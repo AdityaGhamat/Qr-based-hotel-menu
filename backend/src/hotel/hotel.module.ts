@@ -8,6 +8,8 @@ import { CreateHotelProvider } from './provider/create-hotel.provider';
 import { FindByIdProvider } from './provider/find-by-id.provider';
 import { GetDishesByHotelProvider } from './provider/get-dishes-by-hotel.provider';
 import { DishModule } from 'src/dish/dish.module';
+import { GetTableProvider } from './provider/get-table.provider';
+import { GetOrderByTableIdProvider } from './provider/get-order-by-table-id.provider';
 
 @Module({
   controllers: [HotelController],
@@ -16,6 +18,8 @@ import { DishModule } from 'src/dish/dish.module';
     CreateHotelProvider,
     FindByIdProvider,
     GetDishesByHotelProvider,
+    GetTableProvider,
+    GetOrderByTableIdProvider,
   ],
   imports: [
     TypeOrmModule.forFeature([Hotel, Table]),

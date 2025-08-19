@@ -4,6 +4,8 @@ import { CreateHotelDTO } from '../dto/create-hotel.dto';
 import { FindByIdProvider } from './find-by-id.provider';
 import { GetDishesByHotelProvider } from './get-dishes-by-hotel.provider';
 import { PaginationQueryDTO } from 'src/shared/module/pagination/dto/pagination-query.dto';
+import { GetTableProvider } from './get-table.provider';
+import { GetOrderByTableIdProvider } from './get-order-by-table-id.provider';
 
 @Injectable()
 export class HotelService {
@@ -22,6 +24,17 @@ export class HotelService {
      * Injecting getdishesprovider
      */
     private readonly getDishesByHotelIdProvider: GetDishesByHotelProvider,
+
+    /**
+     * Injecting getTable provider
+     */
+    private readonly getTableProvider: GetTableProvider,
+
+    /**
+     * Injecting getOrdersByTable
+     * Id Provider
+     */
+    private readonly getOrderByTableIdProvider: GetOrderByTableIdProvider,
   ) {}
 
   public async createHotel(createHotelDto: CreateHotelDTO) {
@@ -41,5 +54,11 @@ export class HotelService {
       hotelId,
       paginationQuery,
     );
+  }
+  public async getTable(table_id: number, relations?: string[]) {
+    return this.getTableProvider.getTable(table_id, relations);
+  }
+  public async getOrderByTableId(table_id: number) {
+    return this.getOrderByTableIdProvider.getOrdersByTableId(table_id);
   }
 }
