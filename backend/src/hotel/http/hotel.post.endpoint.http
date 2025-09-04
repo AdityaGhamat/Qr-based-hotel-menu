@@ -5,3 +5,15 @@ Content-Type:application/json
     "name":"Swarajya Hotel",
     "description":"This is swarajya hotel.from blessings of chatrapati shivaji maharaj"
 }
+
+POST http://localhost:3000/hotel/create-table/1
+Content-Type:application/json
+
+{
+    "tableUrl":"http://localhost:3000/1"
+}
+
+POST http://localhost:3000/hotel/create-multiple-tables?hotel_id=1&tables=10
+Content-Type:application/json
+{
+}

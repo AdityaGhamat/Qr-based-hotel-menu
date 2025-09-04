@@ -1,6 +1,15 @@
-import { Body, Controller, Post, Param, Get, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Post,
+  Param,
+  Get,
+  Query,
+  ParseIntPipe,
+} from '@nestjs/common';
 import { HotelService } from './provider/hotel.service';
 import { CreateHotelDTO } from './dto/create-hotel.dto';
+import { AddTableDTO } from './dto/add-table.dto';
 
 @Controller('hotel')
 export class HotelController {
@@ -32,5 +41,22 @@ export class HotelController {
       page: page,
       limit: limit,
     });
+  }
+
+  //Table routes starts from here
+  @Post('create-table/:hotel_id')
+  public async createTable(
+    @Body() addTableDto: AddTableDTO,
+    @Param('hotel_id', ParseIntPipe) hotelId: number,
+  ) {
+    return this.hotelService.addTable(addTableDto, hotelId);
+  }
+
+  @Post('create-multiple-tables')
+  public async addMultipleTables(
+    @Query('hotel_id', ParseIntPipe) hotelId: number,
+    @Query('tables', ParseIntPipe) no_of_tables: number,
+  ) {
+    return this.hotelService.addMultipleTables(no_of_tables, hotelId);
   }
 }

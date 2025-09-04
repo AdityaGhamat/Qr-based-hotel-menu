@@ -6,6 +6,9 @@ import { GetDishesByHotelProvider } from './get-dishes-by-hotel.provider';
 import { PaginationQueryDTO } from 'src/shared/module/pagination/dto/pagination-query.dto';
 import { GetTableProvider } from './get-table.provider';
 import { GetOrderByTableIdProvider } from './get-order-by-table-id.provider';
+import { AddTableProvider } from './add-table.provider';
+import { AddTableDTO } from '../dto/add-table.dto';
+import { AddMultipleTablesProvider } from './add-multiple-tables.provider';
 
 @Injectable()
 export class HotelService {
@@ -35,6 +38,16 @@ export class HotelService {
      * Id Provider
      */
     private readonly getOrderByTableIdProvider: GetOrderByTableIdProvider,
+
+    /**
+     * Injecting AddTable Provider
+     */
+    private readonly addTableProvider: AddTableProvider,
+
+    /**
+     * Injecting addMultiple tables
+     */
+    private readonly addMultipleTablesProvider: AddMultipleTablesProvider,
   ) {}
 
   public async createHotel(createHotelDto: CreateHotelDTO) {
@@ -60,5 +73,14 @@ export class HotelService {
   }
   public async getOrderByTableId(table_id: number) {
     return this.getOrderByTableIdProvider.getOrdersByTableId(table_id);
+  }
+  public async addTable(addTableDto: AddTableDTO, hotelId: number) {
+    return this.addTableProvider.addTable(addTableDto, hotelId);
+  }
+  public async addMultipleTables(no_of_tables: number, hotelId: number) {
+    return this.addMultipleTablesProvider.addMultipleTablesInHotels(
+      no_of_tables,
+      hotelId,
+    );
   }
 }

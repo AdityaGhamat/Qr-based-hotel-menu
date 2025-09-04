@@ -8,18 +8,18 @@ import {
 import { Hotel } from './hotel.entity';
 import { Order } from 'src/order/entity/order.entity';
 
-@Entity('restaurant-table')
+@Entity('restaurantTable')
 export class Table {
   @PrimaryGeneratedColumn()
   id: number;
   @Column({
     type: 'varchar',
     length: 256,
-    nullable: false,
+    nullable: true,
   })
   tableUrl: string;
 
-  @ManyToOne(() => Hotel, (hotel) => hotel.tables)
+  @ManyToOne(() => Hotel, (hotel) => hotel.tables, { onDelete: 'CASCADE' })
   hotel: Hotel;
 
   @OneToMany(() => Order, (order) => order.table)
