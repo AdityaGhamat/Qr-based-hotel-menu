@@ -15,6 +15,11 @@ import { SharedModule } from './shared/shared.module';
 import appConfig from './config/app.config';
 import databaseConfig from './config/database.config';
 import envValidation from './config/validation/env.validation';
+import { APP_GUARD } from '@nestjs/core';
+import { AccessTokenGuard } from './auth/guards/access-token/access-token.guard';
+import jwtConfig from './auth/config/jwt.config';
+import { JwtModule } from '@nestjs/jwt';
+import { AuthenticationGuard } from './auth/guards/authentication/authentication.guard';
 
 const Env = process.env.NODE_ENV;
 @Module({
@@ -47,8 +52,17 @@ const Env = process.env.NODE_ENV;
     PaymentModule,
     NotificationModule,
     SharedModule,
+    ConfigModule.forFeature(jwtConfig),
+    JwtModule.registerAsync(jwtConfig.asProvider()),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_GUARD,
+      useClass: AuthenticationGuard,
+    },
+    AccessTokenGuard,
+  ],
 })
 export class AppModule {}

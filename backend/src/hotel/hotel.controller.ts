@@ -10,6 +10,8 @@ import {
 import { HotelService } from './provider/hotel.service';
 import { CreateHotelDTO } from './dto/create-hotel.dto';
 import { AddTableDTO } from './dto/add-table.dto';
+import { Auth } from 'src/auth/decorator/auth.decorator';
+import { AuthType } from 'src/auth/enums/auth-type.enum';
 
 @Controller('hotel')
 export class HotelController {
@@ -31,6 +33,8 @@ export class HotelController {
     return this.hotelService.createHotel(createHotelDto);
   }
 
+  //@SetMetaData('authType','None')
+  @Auth(AuthType.None)
   @Get('dishes/:hotel_id')
   public async getDishesByHotelId(
     @Param('hotel_id') hotel_id: number,
