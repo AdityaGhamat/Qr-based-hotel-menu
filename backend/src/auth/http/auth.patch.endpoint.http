@@ -2,5 +2,5 @@ PATCH http://localhost:3000/auth/resend-otp
 Content-Type:application/json
 
 {
-    "email":"adityaghamat01@gmail.com"
+    "email":"adityaghamat65@gmail.com"
 }

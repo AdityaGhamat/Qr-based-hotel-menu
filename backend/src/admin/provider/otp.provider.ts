@@ -55,6 +55,7 @@ export class OtpProvider {
       const user = await this.adminRepository.findOne({
         where: { email: verifyOtpDto.email },
       });
+      console.log(user);
       if (!user) {
         throw new NotFoundException('Admin not found');
       }

@@ -27,7 +27,7 @@ export class AccessTokenGuard implements CanActivate {
   ) {}
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest();
-    const token = this.extractRequestFromHeader(request);
+    const token = this.extractToken(request);
     if (!token) {
       throw new UnauthorizedException('token not found');
     }
@@ -43,8 +43,13 @@ export class AccessTokenGuard implements CanActivate {
     }
     return true;
   }
-  private extractRequestFromHeader(request: Request): string | undefined {
-    const [_, token] = request.headers.authorization?.split(' ') ?? [];
+  private extractToken(request: Request): string | undefined {
+    const authHeader = request.headers.authorization;
+    if (authHeader && authHeader.startsWith('Bearer')) {
+      const [_, token] = authHeader.split(' ');
+      return token;
+    }
+    const token = request.cookies?.['access_token'];
     return token;
   }
 }

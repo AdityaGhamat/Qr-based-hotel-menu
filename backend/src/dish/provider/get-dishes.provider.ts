@@ -30,7 +30,6 @@ export class GetDishesProvider {
     hotel_id: number,
     paginationQuery: PaginationQueryDTO,
   ) {
-    const hotel = await this.hotelService.findHotelById(hotel_id);
     return this.paginationProvider.paginateQuery(
       paginationQuery,
       this.dishRepository,

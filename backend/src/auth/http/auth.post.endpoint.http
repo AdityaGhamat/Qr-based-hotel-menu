@@ -2,6 +2,6 @@ POST http://localhost:3000/auth/verify-otp
 Content-Type:application/json
 
 {
-    "email":"adityaghamat01@gmail.com",
-    "otp":"435604"
+    "email":"adityaghamat65@gmail.com",
+    "otp":"135256"
 }

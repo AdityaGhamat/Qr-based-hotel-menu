@@ -33,9 +33,8 @@ export class HotelController {
     return this.hotelService.createHotel(createHotelDto);
   }
 
-  //@SetMetaData('authType','None')
-  @Auth(AuthType.None)
   @Get('dishes/:hotel_id')
+  @Auth(AuthType.None)
   public async getDishesByHotelId(
     @Param('hotel_id') hotel_id: number,
     @Query('page') page: number,

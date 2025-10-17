@@ -40,7 +40,6 @@ const Env = process.env.NODE_ENV;
         ),
         synchronize: configService.get<boolean>('database.synchronize'),
         url: configService.get<string>('database.db_url'),
-        logging: true,
       }),
     }),
     HotelModule,

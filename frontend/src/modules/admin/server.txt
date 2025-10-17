@@ -1,0 +1,5 @@
+/** For creating new admin **/
+POST http://localhost:3000/admin/create-admin
+
+/** For getting admin information **/
+GET http://localhost:3000/admin

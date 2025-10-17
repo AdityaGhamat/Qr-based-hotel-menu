@@ -8,6 +8,7 @@ import { AdminController } from './admin.controller';
 import { AdminSendOtpProvider } from './provider/send-otp.provider';
 import { CreateAdminProvider } from './provider/create-admin.provider';
 import { NotificationModule } from 'src/notification/notification.module';
+import { GetAdminProvider } from './provider/get-admin.provider';
 
 @Module({
   providers: [
@@ -15,6 +16,7 @@ import { NotificationModule } from 'src/notification/notification.module';
     OtpProvider,
     AdminSendOtpProvider,
     CreateAdminProvider,
+    GetAdminProvider,
   ],
   imports: [
     TypeOrmModule.forFeature([Admin]),

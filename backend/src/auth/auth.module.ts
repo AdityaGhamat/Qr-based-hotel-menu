@@ -10,6 +10,7 @@ import { TokenGenerationProvider } from './provider/token-generation.provider';
 import { JwtModule } from '@nestjs/jwt';
 import jwtConfig from './config/jwt.config';
 import { ConfigModule } from '@nestjs/config';
+import cookieConfig from './config/cookie.config';
 @Module({
   providers: [
     AuthService,
@@ -19,6 +20,7 @@ import { ConfigModule } from '@nestjs/config';
   ],
   imports: [
     ConfigModule.forFeature(jwtConfig),
+    ConfigModule.forFeature(cookieConfig),
     forwardRef(() => AdminModule),
     NotificationModule,
     JwtModule.registerAsync(jwtConfig.asProvider()),
