@@ -6,6 +6,7 @@ import AdminLoginPage from "@/modules/admin/pages/desktop/AdminLoginPage";
 import OtpVerificationPage from "@/modules/otp/pages/OtpVerificationPage";
 import { createBrowserRouter } from "react-router";
 import ProtectedRoute from "./ProtectedRoute";
+import HotelsList from "@/modules/admin/components/HotelsSection/HotelList";
 
 export const router = createBrowserRouter([
   {
@@ -20,17 +21,21 @@ export const router = createBrowserRouter([
     path: "/admin/:adminId",
     element: (
       <AdminAuthContextProvider>
-        <ProtectedRoute>
-          <SidebarProvider>
-            <AdminLayout />
-          </SidebarProvider>
-        </ProtectedRoute>
+        {/* <ProtectedRoute> */}
+        <SidebarProvider>
+          <AdminLayout />
+        </SidebarProvider>
+        {/* </ProtectedRoute> */}
       </AdminAuthContextProvider>
     ),
     children: [
       {
         index: true,
         element: <AdminDashboard />,
+      },
+      {
+        path: "hotels",
+        element: <HotelsList />,
       },
     ],
   },

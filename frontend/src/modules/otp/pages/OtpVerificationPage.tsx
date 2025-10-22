@@ -10,7 +10,7 @@ const OtpVerificationPage = () => {
       "access_token",
       "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.KMUFsIDTnFmyG3nMiGM6H9FNFUROf3wh7SmqJp-QV30"
     );
-    navigate("/");
+    navigate("/admin/123456");
   };
   return (
     <div className="flex flex-col items-center justify-center min-h-screen space-y-6">
